@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'national_id', 'gender'
     ];
 
     /**
@@ -27,4 +27,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Gender value to be saved in Db ( Change value of key to change it )
+     *
+     * @var array
+     */
+    protected $gender = [
+        'male' => 'male',
+        'female' => 'female'
+    ];
+
+    // <--- Accessors and Mutators -->
+
+    // <--- Relations --->
+
 }
