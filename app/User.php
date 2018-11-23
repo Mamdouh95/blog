@@ -33,7 +33,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $gender = [
+    public static $gender = [
         'male' => 'male',
         'female' => 'female'
     ];
