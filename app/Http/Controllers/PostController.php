@@ -15,9 +15,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('posts.index');
+        $posts = Post::with('user')->whereTarget(Auth::user()->gender)->orderBy('created_at', 'DESC')->paginate(4);
+        if ($request->ajax()){
+            return view('posts._partials.posts', compact('posts'));
+        }
+        return view('posts.index', compact('posts'));
     }
 
     /**

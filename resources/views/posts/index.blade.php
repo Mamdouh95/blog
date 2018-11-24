@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-9" id="posts-container">
                 {{-- Form --}}
                 <div class="p-2 mb-3 bg-whitesmoke card">
                     <form method="POST" id="addPost">
@@ -29,13 +29,7 @@
                     </form>
                 </div>
                 {{-- Posts --}}
-                <div class="card">
-                    <div class="card-header">Post Title</div>
-                    <div class="card-body">
-                        Post Body
-                    </div>
-                </div>
-
+                @include('posts._partials.posts', compact('posts'))
             </div>
 
         </div>

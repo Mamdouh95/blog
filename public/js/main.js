@@ -30,4 +30,21 @@ $(document).ready(function () {
             swal('Uncaught Error..', jqXHR.responseText, 'error');
         }
     };
+
+    // Paginate with Load more
+    $(document).on('click', '.paginate', function () {
+        const elem = $(this);
+        const url = elem.attr('data-url');
+        const container = $('#' + elem.attr('data-container-id'));
+        const loader = $('#' + elem.attr('data-container-id') + ' .loader');
+        elem.hide();
+        loader.show();
+        $.ajax({
+            url: url,
+            success: function (data) {
+                container.append(data);
+                elem.parent().remove();
+            }
+        })
+    });
 });

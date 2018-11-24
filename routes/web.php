@@ -14,7 +14,6 @@ Route::middleware('auth')->group(function () {
     });
     // After Updating Profile with Gender.
     Route::middleware('profileCompleted')->group(function (){
-        Route::get('/posts', 'PostController@index')->name('posts');
         Route::resource('posts', 'PostController')->except(['create']);
     });
 });
