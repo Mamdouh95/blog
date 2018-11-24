@@ -7,6 +7,7 @@ use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class PostController extends Controller
 {
@@ -32,8 +33,9 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Post::create(array_merge($request->only('title', 'body'), ['user_id' => Auth::id(), 'target' => User::$gender[Auth::user()->gender]]));
-        return response()->json(['status' => 'success'], 200);
+        $post = Post::create(array_merge($request->only('title', 'body'), ['user_id' => Auth::id(), 'target' => User::$gender[Auth::user()->gender]]));
+        $postCard = View::make('posts._partials.post')->with('post', $post)->render();
+        return response()->json(['status' => 'success', 'post' => $postCard], 200);
     }
 
     /**
@@ -78,6 +80,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if ($post->user_id != Auth::id()) {
+            return response()->json(['status' => 'error'], 403);
+        }
+        $post->delete();
+        return response()->json(['status' => 'success'], 200);
     }
 }

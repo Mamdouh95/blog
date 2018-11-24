@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9" id="posts-container">
+            <div class="col-md-9">
                 {{-- Form --}}
                 <div class="p-2 mb-3 bg-whitesmoke card">
                     <form method="POST" id="addPost">
@@ -29,7 +29,9 @@
                     </form>
                 </div>
                 {{-- Posts --}}
-                @include('posts._partials.posts', compact('posts'))
+                <div id="posts-container">
+                    @include('posts._partials.posts', compact('posts'))
+                </div>
             </div>
 
         </div>
@@ -49,15 +51,36 @@
                     type: 'POST',
                     data: formData,
                     success: function (data) {
-                        form.trigger("reset");
+                        if (data.status === 'success'){
+                            $('#posts-container').prepend(data.post);
+                            form.trigger("reset");
+                        }
                     },
-                    error:function(data, exception){
+                    error: function(data, exception){
                         swalError(data, exception);
                     }
                 })
             });
             // Edit Post
             // Delete Post
+            $(document).on('click', '.deletePost', function (e) {
+                e.preventDefault();
+                const elem = $(this);
+                const path = elem.attr('data-url');
+                const post = elem.closest('.post-card');
+                $.ajax({
+                    url: path,
+                    type: 'DELETE',
+                    success: function (data) {
+                        if (data.status === 'success'){
+                            post.slideUp("normal", function(){ $(this).remove(); });
+                        }
+                    },
+                    error: function (data, exception) {
+                        swalError(data, exception);
+                    }
+                });
+            })
             // Comment
         });
     </script>
