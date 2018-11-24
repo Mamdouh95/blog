@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('National ID') }}</label>
+                            <label for="national_id" class="col-sm-4 col-form-label text-md-right">{{ __('National ID') }}</label>
 
                             <div class="col-md-6">
                                 <input id="national_id" type="text" class="form-control{{ $errors->has('national_id') ? ' is-invalid' : '' }}" name="national_id" value="{{ old('national_id') }}" required autofocus>
