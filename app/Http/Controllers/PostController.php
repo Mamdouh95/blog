@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with('user')->whereTarget(Auth::user()->gender)->orderBy('created_at', 'DESC')->paginate(4);
+        $posts = Post::with('user')->whereTarget(Auth::user()->gender)->orderBy('created_at', 'DESC')->paginate(10);
         if ($request->ajax()){
             return view('posts._partials.posts', compact('posts'));
         }
@@ -50,26 +50,20 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        if ($post->user_id != Auth::id()) {
+            return response()->json(['status' => 'error'], 403);
+        }
+        $post->update($request->only('title', 'body'));
+        $postCard = View::make('posts._partials.post')->with('post', $post)->render();
+        return response()->json(['status' => 'success', 'postId' => $post->id, 'post' => $postCard], 200);
     }
 
     /**

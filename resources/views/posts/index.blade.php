@@ -15,7 +15,7 @@
             <div class="col-md-9">
                 {{-- Form --}}
                 <div class="p-2 mb-3 bg-whitesmoke card">
-                    <form method="POST" id="addPost">
+                    <form method="POST" action="{{ route('posts.store') }}" id="addPost">
                         @csrf
                         <div class="form-group">
                             <input id="title" type="text" class="form-control" placeholder="Write Post Title" name="title" required>
@@ -39,49 +39,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function () {
-            // Add Post
-            $(document).on('submit', '#addPost', function (e) {
-                e.preventDefault();
-                const form = $('#addPost');
-                const formData = form.serialize();
-                $.ajax({
-                    url: '{{ route('posts.store') }}',
-                    type: 'POST',
-                    data: formData,
-                    success: function (data) {
-                        if (data.status === 'success'){
-                            $('#posts-container').prepend(data.post);
-                            form.trigger("reset");
-                        }
-                    },
-                    error: function(data, exception){
-                        swalError(data, exception);
-                    }
-                })
-            });
-            // Edit Post
-            // Delete Post
-            $(document).on('click', '.deletePost', function (e) {
-                e.preventDefault();
-                const elem = $(this);
-                const path = elem.attr('data-url');
-                const post = elem.closest('.post-card');
-                $.ajax({
-                    url: path,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.status === 'success'){
-                            post.slideUp("normal", function(){ $(this).remove(); });
-                        }
-                    },
-                    error: function (data, exception) {
-                        swalError(data, exception);
-                    }
-                });
-            })
-            // Comment
-        });
-    </script>
+    <script src="{{ asset('js/posts.js') }}"></script>
 @endsection

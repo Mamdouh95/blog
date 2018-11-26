@@ -31,7 +31,7 @@ $(document).ready(function () {
         }
     };
 
-    // Paginate with Load more
+    // Paginate with Load more button ( General implementation that can work anywhere in the site )
     $(document).on('click', '.paginate', function () {
         const elem = $(this);
         const url = elem.attr('data-url');
