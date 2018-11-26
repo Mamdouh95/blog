@@ -44,9 +44,16 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
-        //
+        if($post->target != Auth::user()->gender) {
+            abort(403);
+        }
+        $comments = $post->comments()->with('user')->paginate(5);
+        if ($request->ajax()) {
+            return view('comment.comments', compact('post', 'comments'));
+        }
+        return view('posts.inner', compact('post', 'comments'));
     }
 
     /**

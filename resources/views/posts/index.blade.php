@@ -18,10 +18,10 @@
                     <form method="POST" action="{{ route('posts.store') }}" id="addPost">
                         @csrf
                         <div class="form-group">
-                            <input id="title" type="text" class="form-control" placeholder="Write Post Title" name="title" required>
+                            <input id="title" type="text" class="form-control" placeholder="Post title.." name="title" required>
                         </div>
                         <div class="form-group">
-                            <textarea id="body" type="text" class="form-control" placeholder="Write Post Body" name="body" required></textarea>
+                            <textarea id="body" type="text" class="form-control" placeholder="Post body.." name="body" required></textarea>
                         </div>
                         <div class="float-right">
                             <button type="submit" class="btn btn-outline-dark post">Post</button>

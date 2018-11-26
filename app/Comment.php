@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
-    protected $fillable = ['title', 'body', 'user_id', 'target'];
+    protected $fillable = ['body', 'user_id', 'post_id'];
     // <--- Accessors and Mutators -->
 
     // <--- Relations --->
@@ -15,8 +15,4 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
 }

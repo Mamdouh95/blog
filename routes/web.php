@@ -14,7 +14,10 @@ Route::middleware('auth')->group(function () {
     });
     // After Updating Profile with Gender.
     Route::middleware('profileCompleted')->group(function (){
+        // Posts Resource
         Route::resource('posts', 'PostController')->except(['create', 'edit']);
+        // Comments
+        Route::post('post/{post}/comment', 'CommentController@store')->name('comment.store');
     });
 });
 
