@@ -63,18 +63,30 @@ $(document).ready(function () {
         const elem = $(this);
         const path = elem.attr('data-url');
         const post = elem.closest('.post-card');
-        $.ajax({
-            url: path,
-            type: 'DELETE',
-            success: function (data) {
-                if (data.status === 'success'){
-                    post.slideUp("normal", function(){ $(this).remove(); });
-                }
-            },
-            error: function (data, exception) {
-                swalError(data, exception);
+        swal({
+            title: 'Are you sure ?',
+            text: "You won't be able to revert that.",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#343a40',
+            cancelButtonColor: '#e3342f',
+            confirmButtonText: 'Yes, delete',
+            cancelButtonText: 'Cancel',
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: path,
+                    type: 'DELETE',
+                    success: function (data) {
+                        if (data.status === 'success'){
+                            post.slideUp("normal", function(){ $(this).remove(); });
+                        }
+                    },
+                    error: function (data, exception) {
+                        swalError(data, exception);
+                    }
+                });
             }
         });
     })
-    // Comment
 });
