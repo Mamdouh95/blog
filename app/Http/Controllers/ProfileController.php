@@ -30,7 +30,7 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $user->update($request->only('gender'));
-        return redirect()->route('home');
+        return redirect()->route('posts.index');
     }
 
 }

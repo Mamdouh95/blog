@@ -85,12 +85,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a class="col-md-12" style="display: block; margin-bottom: 10px">Mamdouh Magdy Said</a>
+                    <a class="col-md-12" target="_blank" href="mailto:mamdouhmagdy95@gmail.com" style="display: block; margin-bottom: 10px">MamdouhMagdy95@gmail.com</a>
+                    <a class="col-md-12 my-2" target="_blank" href="https://github.com/Mamdouh95" style="display: block;; margin-bottom: 10px">GitHub</a>
                 </div>
             </div>
         </div>
