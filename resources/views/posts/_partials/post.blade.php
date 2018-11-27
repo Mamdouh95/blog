@@ -3,10 +3,12 @@
         <div class="card-header">
             <h5 class="float-left">{{ $post->title }}</h5>
             @if($post->user->id == Auth::id())
-                <div class="float-right">
-                    <a href="#" title="Edit post" class="editPost mr-1" data-form="#editForm{{ $post->id }}"><i class="fa fa-edit"></i></a>
-                    <a href="#" title="Delete this post" class="deletePost" data-url="{{ route('posts.destroy', ['post' => $post]) }}"><i class="fa fa-trash"></i></a>
-                </div>
+                @if(Route::currentRouteName() != 'posts.show')
+                    <div class="float-right">
+                        <a href="#" title="Edit post" class="editPost mr-1" data-form="#editForm{{ $post->id }}"><i class="fa fa-edit"></i></a>
+                        <a href="#" title="Delete this post" class="deletePost" data-url="{{ route('posts.destroy', ['post' => $post]) }}"><i class="fa fa-trash"></i></a>
+                    </div>
+                @endif
             @endif
         </div>
         <div class="card-body">
